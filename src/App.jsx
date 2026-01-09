@@ -1,36 +1,49 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
+import AddOrder from "./components/AddOrder";
+import OrderList from "./components/OrderList";
+import AssignDelivery from "./components/AssignDelivery";
+import "./index.css";
 
-import AddOrder from './components/AddOrder'
-import OrderList from './components/OrderList'
-import AssignDelivery from './components/AssignDelivery'
+export default function App() {
+  const [orders, setOrders] = useState(() => {
+    return JSON.parse(localStorage.getItem("orders")) || [];
+  });
+  const [orderCounter, setOrderCounter] = useState(() => {
+    return Number(localStorage.getItem("orderCounter")) || 1;
+  });
 
-export default function App(){
+  useEffect(() => {
+    localStorage.setItem("orders", JSON.stringify(orders));
+  }, [orders]);
+   useEffect(() => {
+    localStorage.setItem("orderCounter", orderCounter);
+  }, [orderCounter]);
 
-  // State to hold orders, initialized from localStorage
-  const [orders,setOrders] = useState(()=>{
-    return JSON.parse(localStorage.getItem('orders')) || []
-  })
+  const addOrder = (order) => {
+    const newOrder = {
+      ...order,
+      orderId: `ORD-${orderCounter}`,
+    };
 
-  // Effect to update localStorage whenever orders change
-  useEffect(()=>{
-    localStorage.setItem('orders',JSON.stringify(orders))
-  },[orders])
+    setOrders([...orders, newOrder]);
+    setOrderCounter(orderCounter + 1);
+  };
 
+  return (
+    <div className="container">
+      <h2>Online Food Delivery Order Manager</h2>
 
-  // Function to add a new order
-  const addOrder=(o)=>{
-    setOrders([...orders,o])
-  }
+      <div className="card">
+        <AddOrder addOrder={addOrder} />
+      </div>
 
-  return(
-    <div>
-      <h1>Online Food Delivery Order Management</h1> 
-      <AddOrder addOrder={addOrder} />
-      <hr />
-      <OrderList orders={orders}  />
-      <hr />
-      <AssignDelivery orders={orders}  />
+      <div className="card">
+        <OrderList orders={orders} />
+      </div>
+
+      <div className="card">
+        <AssignDelivery orders={orders} setOrders={setOrders} />
+      </div>
     </div>
-  )
-
+  );
 }
