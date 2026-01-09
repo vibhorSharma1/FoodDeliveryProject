@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+import AddOrder from './components/AddOrder'
+import OrderList from './components/OrderList'
+import AssignDelivery from './components/AssignDelivery'
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+export default function App(){
+
+  // State to hold orders, initialized from localStorage
+  const [orders,setOrders] = useState(()=>{
+    return JSON.parse(localStorage.getItem('orders')) || []
+  })
+
+  // Effect to update localStorage whenever orders change
+  useEffect(()=>{
+    localStorage.setItem('orders',JSON.stringify(orders))
+  },[orders])
+
+
+  // Function to add a new order
+  const addOrder=(o)=>{
+    setOrders([...orders,o])
+  }
+
+  return(
+    <div>
+      <h1>Online Food Delivery Order Management</h1> 
+      <AddOrder addOrder={addOrder} />
+      <hr />
+      <OrderList orders={orders}  />
+      <hr />
+      <AssignDelivery orders={orders}  />
+    </div>
   )
-}
 
-export default App
+}
