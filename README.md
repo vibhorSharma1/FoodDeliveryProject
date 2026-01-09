@@ -99,17 +99,9 @@ Users can filter orders by:
 - Invalid distance handling
 - Graceful handling when no eligible orders are found
 
----
 
-## 📹 Demo Video
 
-A 2-minute demo video is included showing:
-- Adding orders
-- Filtering orders
-- Assigning delivery
-- Handling edge cases
 
-👉 (Provide video link here if required)
 
 ---
 
