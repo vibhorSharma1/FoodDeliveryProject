@@ -1,16 +1,120 @@
-# React + Vite
+# Online Food Delivery Order Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web application to manage food delivery orders.  
+The system allows users to add orders, view and filter them, and automatically assign delivery to the nearest unpaid order.  
+This project is developed and deployed as part of **Round-2 Assignment**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔗 Live Demo
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Expanding the ESLint configuration
+👉 GitHub Repository:  
+https://github.com/vibhorSharma1/FoodDeliveryProject
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🎯 Objective
+
+To develop and deploy a working application that:
+- Manages food delivery orders
+- Supports filtering by payment status and distance
+- Automatically assigns delivery to the nearest unpaid order
+- Is accessible via a public live URL
+
+---
+
+## 🛠 Technology Stack
+
+- **Frontend:** React (Vite)
+- **State Management:** React Hooks (`useState`, `useEffect`)
+- **Persistence:** Browser `localStorage`
+- **Styling:** Custom CSS (Dark Theme)
+- **Deployment:** Vercel
+- **Version Control:** Git & GitHub
+
+---
+
+## 📦 Data Model
+
+Each order contains the following fields:
+
+| Field | Description |
+|------|------------|
+| orderId | Auto-generated unique ID (e.g. ORD-1) |
+| restaurantName | Name of the restaurant |
+| itemCount | Number of items |
+| isPaid | Payment status (true / false) |
+| deliveryDistance | Distance in kilometers |
+
+---
+
+## 🚀 Features
+
+### 1. Add Order
+- User can add a new food order using a form
+- Order ID is auto-generated
+- Input validation included
+
+### 2. View All Orders
+- All orders are displayed in a tabular format
+- Payment status is clearly indicated
+
+### 3. Filter Orders
+Users can filter orders by:
+- **All / Paid / Unpaid**
+- **Maximum delivery distance (≤ X km)**
+
+### 4. Assign Delivery
+- Only unpaid orders are considered
+- Nearest order within the given distance is selected
+- Once assigned, the order is marked as paid
+- If no order is available, a message is displayed
+
+---
+
+## 🧠 Delivery Assignment Logic
+
+1. Filter unpaid orders
+2. Filter orders within the given maximum distance
+3. Sort orders by delivery distance (ascending)
+4. Assign the nearest order
+5. Update order status to prevent reassignment
+
+---
+
+## 🎨 UI Highlights
+
+- Dark theme for better visual consistency
+- Card-based layout for clear separation of features
+- Responsive and user-friendly interface
+- Clean and readable table layout
+
+---
+
+## ⚠️ Error Handling
+
+- Empty input validation
+- Invalid distance handling
+- Graceful handling when no eligible orders are found
+
+---
+
+## 📹 Demo Video
+
+A 2-minute demo video is included showing:
+- Adding orders
+- Filtering orders
+- Assigning delivery
+- Handling edge cases
+
+👉 (Provide video link here if required)
+
+---
+
+## 📂 Project Setup (Local)
+
+```bash
+npm install
+npm run dev
